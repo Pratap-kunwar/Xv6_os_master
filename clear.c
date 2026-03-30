@@ -1,15 +1,18 @@
 #include "types.h"
 #include "stat.h"
 #include "user.h"
-#include "fs.h"
 
-int main()
+#define LINES 200  // Increase number of lines to ensure shell is cleared
+
+int main(void)
 {
-    int i;
-    for (i = 0; i < 2000; i++)
-    {
-        printf(1, " ");
+    // Try ANSI clear first (works in terminal emulators)
+    printf(1, "\033[2J\033[H");
+
+    // Fallback for Xv6 shell: print enough blank lines
+    for(int i = 0; i < LINES; i++){
+        printf(1, "\n");
     }
-    printf(1, "\n");
+
     exit();
 }
